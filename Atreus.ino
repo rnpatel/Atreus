@@ -53,7 +53,7 @@ enum {
 enum {
   QWERTY,
   FUN,
-  NUMB
+  NUM
 };
 
 enum { TAPDANCE_LEFT_BRACKET,
@@ -78,7 +78,7 @@ KEYMAPS(
         /*-----*/                   Key_Y,             Key_U,        Key_I,            Key_O,         Key_P,
         /*-----*/                   Key_H,             ALT_T(J),     GUI_T(K),         CTL_T(L),      SFT_T(Semicolon),
         Key_Enter,                  Key_N,             Key_M,        Key_Comma,        Key_Period,    Key_Slash,
-        TD(TAPDANCE_RIGHT_BRACKET), KEYCHORD_HYPER,    Key_Space,    Key_Backslash,    Key_Minus,     L(NUMB)
+        TD(TAPDANCE_RIGHT_BRACKET), KEYCHORD_HYPER,    Key_Space,    Key_Backslash,    Key_Minus,     L(NUM)
     ),
 
     [FUN] = KEYMAP_STACKED
@@ -97,10 +97,10 @@ KEYMAPS(
         /*-----*/ Key_F6,                                        Key_F7,                     Key_F8,                     Key_F9,                  Key_F10,
         /*-----*/ Consumer_Mute,                                 ___,                        Key_UpArrow,                Key_LeftShift,           Key_LeftGui,
         ___,      Consumer_VolumeIncrement,                      Key_LeftArrow,              Key_DownArrow,              Key_RightArrow,          Key_LeftAlt,
-        ___,      Consumer_VolumeDecrement,                      Key_Backspace,              Consumer_ScanPreviousTrack, Consumer_PlaySlashPause, Consumer_ScanNextTrack
+        ___,      Consumer_VolumeDecrement,                      Consumer_ScanPreviousTrack, Consumer_PlaySlashPause,    Consumer_ScanNextTrack,  Key_Backspace
     ),
 
-    [NUMB] = KEYMAP_STACKED
+    [NUM] = KEYMAP_STACKED
     (
         //
         // left hand
@@ -159,7 +159,7 @@ void loop() {
   Kaleidoscope.loop();
 }
 
-void tapDanceAction(uint8_t tap_dance_index, byte row, byte col, uint8_t tap_count,
+void tapDanceAction(uint8_t tap_dance_index, KeyAddr key_addr, uint8_t tap_count,
                     kaleidoscope::plugin::TapDance::ActionType tap_dance_action)
 {
     switch (tap_dance_index)
