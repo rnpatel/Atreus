@@ -56,8 +56,11 @@ enum {
   NUM
 };
 
-enum { TDLB,
-       TDRB };
+enum {
+    TDLB,
+    TDRB,
+    TDME
+};
 
 
 /* *INDENT-OFF* */
@@ -70,7 +73,7 @@ KEYMAPS(
      * ├───────┼───────┼───────┼───────┼───────┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
      * │   Z   │   X   │   C   │   V   │   B   │  ⇧•⇥  │        │  RET  │   N   │   M   │   ,   │   .   │   /   │
      * ├───────┼───────┼───────┼───────┼───────┼───────┤        ├───────┼───────┼───────┼───────┼───────┼───────┤
-     * │ FUN•` │  ESC  │  Ins  │ BKSPC │  MEH  │ LBRKT │        │ RBRKT │ HYPER │  SPC  │   \   │   -   │ NUM•' │
+     * │ FUN•` │  ESC  │  Ins  │ (→[→{ │ BKSPC │  MEH  │        │ HYPER │  SPC  │ )→]→} │   \   │ - → = │ NUM•' │
      * └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
      */
     [QWERTY] = KEYMAP_STACKED
@@ -81,7 +84,7 @@ KEYMAPS(
         Key_Q,                  Key_W,          Key_E,          Key_R,          Key_T,          /*-----*/
         SFT_T(A),               CTL_T(S),       GUI_T(D),       ALT_T(F),       Key_G,          /*-----*/
         Key_Z,                  Key_X,          Key_C,          Key_V,          Key_B,          SFT_T(Tab),
-        LT(FUN,Backtick),       Key_Escape,     Key_Insert,     Key_Backspace,  CH_MEH,         TD(TDLB),
+        LT(FUN,Backtick),       Key_Escape,     Key_Insert,     TD(TDLB),       Key_Backspace,  CH_MEH,
 
         //
         // right hand
@@ -89,16 +92,16 @@ KEYMAPS(
         /*-----*/  Key_Y,         Key_U,     Key_I,         Key_O,      Key_P,
         /*-----*/  Key_H,         ALT_T(J),  GUI_T(K),      CTL_T(L),   SFT_T(Semicolon),
         Key_Enter, Key_N,         Key_M,     Key_Comma,     Key_Period, Key_Slash,
-        TD(TDRB),  CH_HYPER,      Key_Space, Key_Backslash, Key_Minus,  LT(NUM,Quote)
+        CH_HYPER,  Key_Space,     TD(TDRB),  Key_Backslash, TD(TDME),   LT(NUM,Quote)
     ),
 
     /* FUN
      * ┌───────┬───────┬───────┬───────┬───────┐                        ┌───────┬───────┬───────┬───────┬───────┐
      * │  F1   │  F2   │  F3   │  F4   │  F5   │                        │  F6   │  F7   │  F8   │  F9   │  F10  │
      * ├───────┼───────┼───────┼───────┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
-     * │  F11  │  F12  │       │       │       │                        │ VOLX  │       │   ↑   │   ⇧   │   ⌘   │
+     * │  F11  │  F12  │       │       │       │                        │ VOLX  │       │   ↑   │       │   ⌘   │
      * ├───────┼───────┼───────┼───────┼───────┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
-     * │       │       │       │       │       │       │        │       │ VOL↑  │   ←   │   ↓   │   →   │   ⌥   │
+     * │       │       │       │       │       │   ⇧   │        │       │ VOL↑  │   ←   │   ↓   │   →   │   ⌥   │
      * ├───────┼───────┼───────┼───────┼───────┼───────┤        ├───────┼───────┼───────┼───────┼───────┼───────┤
      * │       │       │       │       │       │       │        │       │ VOL↓  │  <<   │  ||   │  >>   │       │
      * └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
@@ -109,17 +112,17 @@ KEYMAPS(
         // left hand
         //
         Key_F1,   Key_F2,     Key_F3,  Key_F4,        Key_F5, /*-----*/
-        Key_F11,  Key_F12,    ___,     ___,           ___,    /*-----*/
-        ___,      ___,        ___,     ___,           ___,    ___,
-        ___,      ___,        ___,     Key_Backspace, ___,    ___,
+        Key_F11,  Key_F12,    XXX,     XXX,           XXX,    /*-----*/
+        XXX,      XXX,        XXX,     XXX,           XXX,    Key_LeftShift,
+        ___,      ___,        XXX,     Key_Backspace, XXX,    XXX,
 
         //
         // right hand
         //
         /*-----*/ Key_F6,                   Key_F7,                     Key_F8,                  Key_F9,                 Key_F10,
-        /*-----*/ Consumer_Mute,            ___,                        Key_UpArrow,             Key_LeftShift,          Key_LeftGui,
+        /*-----*/ Consumer_Mute,            XXX,                        Key_UpArrow,             XXX,                    Key_LeftGui,
         ___,      Consumer_VolumeIncrement, Key_LeftArrow,              Key_DownArrow,           Key_RightArrow,         Key_LeftAlt,
-        ___,      Consumer_VolumeDecrement, Consumer_ScanPreviousTrack, Consumer_PlaySlashPause, Consumer_ScanNextTrack, ___
+        XXX,      Consumer_VolumeDecrement, Consumer_ScanPreviousTrack, Consumer_PlaySlashPause, Consumer_ScanNextTrack, ___
     ),
 
     /* NUM
@@ -128,9 +131,9 @@ KEYMAPS(
      * ├───────┼───────┼───────┼───────┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
      * │   !   │   @   │   #   │   $   │   %   │                        │   ^   │   &   │   *   │   (   │   )   │
      * ├───────┼───────┼───────┼───────┼───────┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
-     * │       │       │       │       │       │  PgUP │        │ HOME  │ VOL↑  │   ←   │   ↓   │   →   │   ⌥   │
+     * │   =   │       │       │       │       │  PgUP │        │ HOME  │ VOL↑  │   ←   │   ↓   │   →   │   ⌥   │
      * ├───────┼───────┼───────┼───────┼───────┼───────┤        ├───────┼───────┼───────┼───────┼───────┼───────┤
-     * │       │       │       │       │       │  PgDN │        │  END  │ VOL↓  │  <<   │  ||   │  >>   │       │
+     * │   +   │       │       │       │       │  PgDN │        │  END  │ VOL↓  │  <<   │  ||   │  >>   │       │
      * └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
      */
     [NUM] = KEYMAP_STACKED
@@ -138,18 +141,18 @@ KEYMAPS(
         //
         // left hand
         //
-        Key_1,    Key_2,  Key_3,    Key_4,      Key_5,       /*-----*/
-        Key_Bang, Key_At, Key_Hash, Key_Dollar, Key_Percent, /*-----*/
-        ___,      ___,    ___,      ___,        ___,         Key_PageUp,
-        ___,      ___,    ___,      ___,        ___,         Key_PageDown,
+        Key_1,      Key_2,  Key_3,    Key_4,      Key_5,       /*-----*/
+        Key_Bang,   Key_At, Key_Hash, Key_Dollar, Key_Percent, /*-----*/
+        Key_Equals, XXX,    XXX,      XXX,        XXX,         Key_PageUp,
+        Key_Plus,   ___,    XXX,      XXX,        XXX,         Key_PageDown,
 
         //
         // right hand
         //
         /*-----*/ Key_6,      Key_7,   Key_8,    Key_9,    Key_0,
         /*-----*/ Key_Caret,  Key_And, Key_Star, TOPSY(9), TOPSY(0),
-        Key_Home, ___,        ___,     ___,      ___,      ___,
-        Key_End,  ___,        ___,     ___,      ___,      ___
+        Key_Home, XXX,        XXX,     XXX,      XXX,      XXX,
+        Key_End,  XXX,        XXX,     XXX,      XXX,      ___
     )
 )
 /* *INDENT-ON* */
@@ -204,6 +207,10 @@ void tapDanceAction(uint8_t tap_dance_index, KeyAddr key_addr, uint8_t tap_count
         case TDRB:
             return tapDanceActionKeys(tap_count, tap_dance_action,
                                       TOPSY(0), Key_RightBracket, Key_RightCurlyBracket);
+            break;
+        case TDME:
+            return tapDanceActionKeys(tap_count, tap_dance_action,
+                                      Key_Minus, Key_Equals);
             break;
     }
 }
